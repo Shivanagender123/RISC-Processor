@@ -99,3 +99,35 @@ output reg [DATA_WIDTH -1:0] OUT;
 	end
 
 endmodule
+
+
+// 4-sel Barrel shifter using behaviour model
+// 		-OPR=1 -> ALUC[3] -> Shift Right Arthematic
+//              -OPR=0,CNTR=1 -> ALUC[2]=1 -> Shift Right Logical 
+//              -OPR=0,CNTR=0 -> ALUC[2]=0 -> Shift Left Logical  
+module BARREL_SHIFTER_32bit#(  parameter DATA_WIDTH = 32, parameter CTRL_WIDTH = 5 ) (A,B,OPR,CNTR,OUT);
+
+input      [CTRL_WIDTH -1:0] A;//Control input 5
+input      [DATA_WIDTH -1:0] B;
+input                        OPR;
+input                        CNTR;
+output reg [DATA_WIDTH -1:0] OUT;
+
+	reg signed [DATA_WIDTH -1:0] Loc_B;
+	
+	always @( A,B,OPR,CNTR) 
+	begin
+		if(OPR == 1'b1)
+		begin			
+			Loc_B = $signed(B);
+			if(CNTR == 1'b1) OUT   = Loc_B >>> A;// A=5 to shift by 5
+			//else Latch as OPR=1 and CNTR=0 is not possible 
+		end
+		else 
+		begin
+			if(CNTR == 1'b1)  OUT = B >> A;
+			else              OUT = B << A;
+		end
+	end
+
+endmodule
