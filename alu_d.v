@@ -131,3 +131,28 @@ output reg [DATA_WIDTH -1:0] OUT;
 	end
 
 endmodule
+
+// Carry look ahead adder and subtractor for 32bit 
+//     - EN decides adder or subtractor 
+//     - En = 1, subtraction, EN=0 Addition
+module CLAADDER_SUBTRACTOR_32bit#(  parameter DATA_WIDTH = 32 ) (A,B,EN,OUT,CARRY);
+
+input      [DATA_WIDTH -1:0] A;
+input      [DATA_WIDTH -1:0] B;
+input                        EN;
+output reg [DATA_WIDTH -1:0] OUT;
+output reg                   CARRY;
+
+	wire [DATA_WIDTH:0] C;
+
+	assign C[0] = 0;
+
+	genvar i;
+	
+	// Carry genrator using propagate and generate
+	generate
+		for (i=0; i < DATA_WIDTH; i=i+1 ) 
+		begin :Carry_i
+			assign C[i+1] = (A[i] & B[i]) | ((A[i] ^ B[i]) & C[i]);
+		end
+	endgenerate
