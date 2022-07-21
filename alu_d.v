@@ -156,3 +156,19 @@ output reg                   CARRY;
 			assign C[i+1] = (A[i] & B[i]) | ((A[i] ^ B[i]) & C[i]);
 		end
 	endgenerate
+
+
+	always @(*) 
+	begin
+		if(EN == 1'b1)
+		begin
+			OUT =  (A >= B) ? (A-B) : (B-A) ;
+		end
+		else 
+		begin
+			OUT = A ^ B ^ C;
+			CARRY = C[DATA_WIDTH];
+		end
+	end 
+
+endmodule
