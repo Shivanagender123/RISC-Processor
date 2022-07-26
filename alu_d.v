@@ -177,4 +177,13 @@ endmodule
 // Operation: LUI can be done by wiring low 16 bits to high 16 bits.
 module LUI_MODULE_32bit#(  parameter DATA_WIDTH = 32, parameter LOC_BIT_WIDTH = 16 ) (B,OUT);
 
-input      [LOC_BI
+input      [LOC_BIT_WIDTH  -1:0] B;
+output reg [DATA_WIDTH -1:0]     OUT;
+	
+	always@(*)
+	begin
+		OUT[DATA_WIDTH-1 : DATA_WIDTH-LOC_BIT_WIDTH] = B; //Lowr B to Higher OUT
+		OUT[DATA_WIDTH-LOC_BIT_WIDTH-1 : 0]          = 'h0; //Lower OUT is GND
+	end
+
+endmodule
