@@ -172,3 +172,9 @@ output reg                   CARRY;
 	end 
 
 endmodule
+
+// LUI for 32bits using behaviour modelling
+// Operation: LUI can be done by wiring low 16 bits to high 16 bits.
+module LUI_MODULE_32bit#(  parameter DATA_WIDTH = 32, parameter LOC_BIT_WIDTH = 16 ) (B,OUT);
+
+input      [LOC_BI
