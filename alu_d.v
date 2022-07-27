@@ -187,3 +187,14 @@ output reg [DATA_WIDTH -1:0]     OUT;
 	end
 
 endmodule
+
+
+
+// ALU top using structural modelling which includes all the above modules
+// Description : The ALU top  performs the below functions
+//               ALUC Operation
+//               x000 ADD
+//               X100 SUB
+//               X010 XOR
+//               X001 AND
+//               X101 OR
