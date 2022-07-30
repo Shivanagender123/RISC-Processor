@@ -41,7 +41,6 @@ output reg [DATA_WIDTH -1:0] OUT;
 
 endmodule
 
-
 //XOR Gate using behaviour model- using 32bit bitwise xor operator
 module XORGate_32bit#(parameter DATA_WIDTH = 32) (A,B,OUT);
 
