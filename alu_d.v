@@ -98,7 +98,6 @@ output reg [DATA_WIDTH -1:0] OUT;
 
 endmodule
 
-
 // 4-sel Barrel shifter using behaviour model
 // 		-OPR=1 -> ALUC[3] -> Shift Right Arthematic
 //              -OPR=0,CNTR=1 -> ALUC[2]=1 -> Shift Right Logical 
