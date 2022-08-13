@@ -213,3 +213,7 @@ output     [DATA_WIDTH -1:0] OUT;
 	wire [DATA_WIDTH -1:0] MUX2x1_1_Out;
 	wire [DATA_WIDTH -1:0] MUX2x1_2_Out;
 	wire                   CARRY;
+	
+	CLAADDER_SUBTRACTOR_32bit#(.DATA_WIDTH(DATA_WIDTH)) claadder_sub(.A(A),.B(B),.EN(ALUC[2]),.OUT(ADDER_Out),.CARRY(CARRY));
+
+	ANDGate_32bit#(.DATA_WIDTH(DATA_WIDTH)) and_gate(.A(A),.B(B),.OUT(AND_Out));
