@@ -197,3 +197,19 @@ endmodule
 //               0011 SLL
 //               0111 SRL
 //               1111 SRA
+module ALU_TOP_32bit#(  parameter DATA_WIDTH = 32, parameter CTRL_WIDTH = 4 ) (A,B,ALUC,OUT);
+
+input      [DATA_WIDTH -1:0] A;
+input      [DATA_WIDTH -1:0] B;
+input      [CTRL_WIDTH -1:0] ALUC;
+output     [DATA_WIDTH -1:0] OUT;
+
+	wire [DATA_WIDTH -1:0] AND_Out;
+	wire [DATA_WIDTH -1:0] OR_Out ;
+	wire [DATA_WIDTH -1:0] XOR_Out;
+	wire [DATA_WIDTH -1:0] LUI_Out;
+	wire [DATA_WIDTH -1:0] SHIFTER_Out;
+	wire [DATA_WIDTH -1:0] ADDER_Out;
+	wire [DATA_WIDTH -1:0] MUX2x1_1_Out;
+	wire [DATA_WIDTH -1:0] MUX2x1_2_Out;
+	wire                   CARRY;
