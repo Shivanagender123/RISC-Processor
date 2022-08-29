@@ -225,3 +225,11 @@ output     [DATA_WIDTH -1:0] OUT;
 	LUI_MODULE_32bit#(.DATA_WIDTH(DATA_WIDTH),.LOC_BIT_WIDTH(16)) lui_uut(.B(B[15:0]),.OUT(LUI_Out));
 
 	BARREL_SHIFTER_32bit#(.DATA_WIDTH(DATA_WIDTH),.CTRL_WIDTH(5)) shifter(.A(A[4:0]),.B(B),.OPR(ALUC[3]),.CNTR(ALUC[2]),.OUT(SHIFTER_Out));
+
+	MUX_2x1_32bit#(.DATA_WIDTH(DATA_WIDTH)) and_or_gate_mux(.A(AND_Out),.B(OR_Out),.SEL(ALUC[2]),.OUT(MUX2x1_1_Out));
+
+	MUX_2x1_32bit#(.DATA_WIDTH(DATA_WIDTH)) xor_lui_mux(.A(XOR_Out),.B(LUI_Out),.SEL(ALUC[2]),.OUT(MUX2x1_2_Out));
+
+	MUX_4x1_32bit#(.DATA_WIDTH(DATA_WIDTH)) final_mux(.A(ADDER_Out),.B(MUX2x1_1_Out),.C(MUX2x1_2_Out),.D(SHIFTER_Out),.SEL(ALUC[1:0]),.OUT(OUT));
+
+endmodule
