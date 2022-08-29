@@ -213,7 +213,15 @@ output     [DATA_WIDTH -1:0] OUT;
 	wire [DATA_WIDTH -1:0] MUX2x1_1_Out;
 	wire [DATA_WIDTH -1:0] MUX2x1_2_Out;
 	wire                   CARRY;
-	
+
 	CLAADDER_SUBTRACTOR_32bit#(.DATA_WIDTH(DATA_WIDTH)) claadder_sub(.A(A),.B(B),.EN(ALUC[2]),.OUT(ADDER_Out),.CARRY(CARRY));
 
 	ANDGate_32bit#(.DATA_WIDTH(DATA_WIDTH)) and_gate(.A(A),.B(B),.OUT(AND_Out));
+
+	ORGate_32bit#(.DATA_WIDTH(DATA_WIDTH))   or_gate(.A(A),.B(B),.OUT(OR_Out)) ;
+
+	XORGate_32bit#(.DATA_WIDTH(DATA_WIDTH)) xor_gate(.A(A),.B(B),.OUT(XOR_Out));
+
+	LUI_MODULE_32bit#(.DATA_WIDTH(DATA_WIDTH),.LOC_BIT_WIDTH(16)) lui_uut(.B(B[15:0]),.OUT(LUI_Out));
+
+	BARREL_SHIFTER_32bit#(.DATA_WIDTH(DATA_WIDTH),.CTRL_WIDTH(5)) shifter(.A(A[4:0]),.B(B),.OPR(ALUC[3]),.CNTR(ALUC[2]),.OUT(SHIFTER_Out));
